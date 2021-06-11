@@ -24,4 +24,15 @@ export class ThumbsService {
     const thumb = this.thumbRepository.create({ user, article });
     return await this.thumbRepository.save(thumb);
   }
+
+  async counterPostThumb(thumbBody: ThumbEntity) {
+    const article: ArticleEntity = await this.articleRepository.findOne(
+      thumbBody.article,
+    );
+    await this.articleRepository
+      .createQueryBuilder('articles')
+      .update(article)
+      .set({ thumbs: () => 'thumbs+1' })
+      .execute();
+  }
 }

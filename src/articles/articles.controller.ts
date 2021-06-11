@@ -1,10 +1,11 @@
 import {
+  Body,
   Controller,
   Get,
   Param,
-  Post,
-  Body,
   ParseIntPipe,
+  Post,
+  Query,
 } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { CreateArticleDto } from './dtos/create-article.dto';
@@ -12,6 +13,11 @@ import { CreateArticleDto } from './dtos/create-article.dto';
 @Controller('articles')
 export class ArticlesController {
   constructor(private readonly postService: ArticlesService) {}
+
+  @Get('/findByFilter')
+  async findByFilter(@Query() query: any) {
+    return await this.postService.searchByName(query);
+  }
 
   @Get()
   async getMany() {

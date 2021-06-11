@@ -34,4 +34,14 @@ export class ArticlesService {
       throw new NotFoundException('Post does not exist or unauthorized');
     return post;
   }
+  async searchByName(query) {
+    const searchBy = Object.keys(query)[0];
+    return await this.postRepository
+      .createQueryBuilder('articles')
+      .select()
+      .where(`${searchBy} LIKE :searchTerm`, {
+        searchTerm: `%${query[searchBy].toString()}%`,
+      })
+      .getMany();
+  }
 }
