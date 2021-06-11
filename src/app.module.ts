@@ -5,13 +5,17 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ArticlesModule } from './articles/articles.module';
 import { CommentsModule } from './comments/comments.module';
-import { ThmubsModule } from './thmubs/thmubs.module';
-import { ThumbsService } from './thumbs/thumbs.service';
-import { ThumbsController } from './thumbs/thumbs.controller';
+import { ThumbsModule } from './thumbs/thumbs.module';
 
 @Module({
-  imports: [UsersModule, TypeOrmModule.forRoot(), ArticlesModule, CommentsModule, ThmubsModule],
-  controllers: [AppController, ThumbsController],
-  providers: [AppService, ThumbsService],
+  imports: [
+    UsersModule,
+    TypeOrmModule.forRoot(),
+    ArticlesModule,
+    CommentsModule,
+    ThumbsModule,
+  ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

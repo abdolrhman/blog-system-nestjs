@@ -6,7 +6,6 @@ import {
   ManyToOne,
   JoinColumn,
   UpdateDateColumn,
-  OneToOne,
   OneToMany,
 } from 'typeorm';
 import { User } from '../users/user.entity';
@@ -22,6 +21,9 @@ export class ArticleEntity {
 
   @Column({ type: 'text' })
   body!: string;
+
+  @Column({ type: 'int' })
+  thumbs: number;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
   createdAt: Date;
