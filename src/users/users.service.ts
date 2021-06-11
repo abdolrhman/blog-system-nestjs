@@ -18,16 +18,8 @@ export class UsersService {
 
   async getUser(_id: number): Promise<User[]> {
     return await this.usersRepository.find({
-      select: ['fullName', 'birthday', 'isActive'],
+      select: ['fullName', 'jobTitle'],
       where: [{ id: _id }],
     });
-  }
-
-  async updateUser(user: User) {
-    await this.usersRepository.save(user);
-  }
-
-  async deleteUser(user: User) {
-    await this.usersRepository.delete(user);
   }
 }
