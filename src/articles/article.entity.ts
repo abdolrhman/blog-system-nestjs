@@ -6,10 +6,13 @@ import {
   ManyToOne,
   JoinColumn,
   UpdateDateColumn,
+  OneToOne,
+  OneToMany,
 } from 'typeorm';
 import { User } from '../users/user.entity';
+import { CommentEntity } from '../comments/comment.entity';
 
-@Entity('posts')
+@Entity('articles')
 export class ArticleEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -29,4 +32,9 @@ export class ArticleEntity {
   @ManyToOne(() => User, (user) => user.articles, { eager: true })
   @JoinColumn({ name: 'author' })
   author: User;
+
+  @OneToMany((_) => CommentEntity, (comment) => comment.article, {
+    cascade: true,
+  })
+  comments: CommentEntity;
 }
